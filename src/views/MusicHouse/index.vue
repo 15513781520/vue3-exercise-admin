@@ -1,14 +1,14 @@
 <template>
   <div>
-      <router-view></router-view>
+      音乐管
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from "vue"
 
 export default defineComponent ({
-  name: 'Content',
+  name: 'MusicHouse',
 })
 </script>
 

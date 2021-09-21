@@ -1,14 +1,14 @@
 <template>
   <div>
-      <router-view></router-view>
+      推荐
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from "vue"
 
 export default defineComponent ({
-  name: 'Content',
+  name: 'Recommend',
 })
 </script>
 

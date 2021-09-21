@@ -9,56 +9,27 @@
 		text-color="#fff"
 		active-text-color="#ffd04b"
 	>
-		<el-sub-menu index="1">
-			<template #title>
-				<i class="el-icon-location"></i>
-				<span>导航一</span>
-			</template>
-			<el-menu-item-group>
-				<template #title>分组一</template>
-				<el-menu-item index="1-1">选项1</el-menu-item>
-				<el-menu-item index="1-2">选项2</el-menu-item>
-			</el-menu-item-group>
-			<el-menu-item-group title="分组2">
-				<el-menu-item index="1-3">选项3</el-menu-item>
-			</el-menu-item-group>
-			<el-sub-menu index="1-4">
-				<template #title>选项4</template>
-				<el-menu-item index="1-4-1">选项1</el-menu-item>
+		<el-menu-item v-for="(menuItem, index) in menuItems" :key="index" :index="menuItem.name" @click="routeChange(menuItem)">
+			<i v-if="!menuItem.imgUrl" :class="`img-icon ${menuItem.icon}`" style="font-size: 16px"></i>
+			<img v-if="menuItem.imgUrl" :src="menuItem.imgUrl" class="img-icon" alt="">
+			<template #title>{{menuItem.name}}</template>
+		</el-menu-item>
+		<template v-for="(subMenu, index) in subMenus" :key="index">
+			<el-sub-menu :index="subMenu.name">
+				<i v-if="!subMenu.imgUrl" :class="subMenu.icon"></i>
+				<img v-if="subMenu.imgUrl" :src="subMenu.imgUrl" class="img-icon" alt="">
+				<template #title>{{subMenu.name}}</template>
 			</el-sub-menu>
-		</el-sub-menu>
-		<el-menu-item index="2">
-			<i class="el-icon-menu"></i>
-			<template #title>导航二</template>
-		</el-menu-item>
-		<el-menu-item index="3" disabled>
-			<i class="el-icon-document"></i>
-			<template #title>导航三</template>
-		</el-menu-item>
-		<el-menu-item index="4">
-			<i class="el-icon-setting"></i>
-			<template #title>导航四</template>
-		</el-menu-item>
-		<el-sub-menu index="5">
-			<template #title>
-				<i class="el-icon-location"></i>
-				<span>导航一</span>
-			</template>
-			<el-menu-item-group>
-				<template #title>分组一</template>
-				<el-menu-item index="5-1">选项1</el-menu-item>
-				<el-menu-item index="5-2">选项2</el-menu-item>
-			</el-menu-item-group>
-			<el-menu-item-group title="分组2">
-				<el-menu-item index="5-3">选项3</el-menu-item>
-			</el-menu-item-group>
-		</el-sub-menu>
+		</template>
 	</el-menu>
 </template>
 
 <script lang="ts">
-	import { defineComponent } from "vue";
+	import { defineComponent, reactive, toRefs } from "vue";
+	import { useRouter } from 'vue-router';
 	import { ElMenu, ElSubMenu, ElMenuItem } from "element-plus";
+	import { menu } from '@/config/menu';
+	import { MenuItem } from '@/config/interface';
 
 	export default defineComponent({
 		name: "Sidebar",
@@ -67,11 +38,35 @@
             ElSubMenu,
             ElMenuItem,
 		},
+		setup(props, context) {
+			const menuConfig = reactive(menu || {});
+
+			const router = useRouter();
+
+			function routeChange(target: MenuItem) {
+				router.push({
+					path: target.path,
+				})
+			}
+
+			return {
+				...toRefs(menuConfig),
+				routeChange,
+			}
+		}
 	});
 </script>
 
 <style lang="less" scoped>
 	.sidebar-container {
 		min-width: 200px;
+
+		img-icon {
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			margin-right: 4px;
+		}
+
 	}
 </style>
