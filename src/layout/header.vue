@@ -15,7 +15,7 @@
 <style lang="less" scoped>
 	.header-container {
         width: 100%;
-        height: 100px;
+        height: 75px;
         background: pink;
 	}
 </style>

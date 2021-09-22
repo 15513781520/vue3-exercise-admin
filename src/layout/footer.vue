@@ -16,7 +16,7 @@ export default defineComponent ({
 
 .footer-container {
     width: 100%;
-    height: 100px;
+    height: 70px;
     background: skyblue;
 }
 

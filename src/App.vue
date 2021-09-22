@@ -1,50 +1,46 @@
 <template>
   <div class="root">
-    <Header class="header"></Header>
-    <div class="main">
-      <Sidebar class="sidebar"></Sidebar>
-      <Content class="content"></Content>
-    </div>
-    <Footer class="footer"></Footer>
+    <el-card :body-style="{ padding: 0 }">
+      <Layout class="layout"></Layout>
+    </el-card>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Header from 'layout/header.vue';
-import Sidebar from 'layout/sidebar.vue';
-import Footer from 'layout/footer.vue';
-import Content from 'layout/content.vue';
+import { ElCard } from 'element-plus';
+import Layout from 'layout/layout.vue';
 
 
 export default defineComponent({
+  name: 'App',
   components: {
-    Header,
-    Sidebar,
-    Footer,
-    Content
+    Layout,
+    ElCard,
   }
 });
 </script>
 
 <style lang="less" scoped>
 
-.root {
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
-
-  .main {
-    flex: 1 1 auto;
+  .root {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    &::after,  &::before{
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    .layout {
+      width: 53vw;
+      height: 74vh;
+    }
   }
-
-}
-
-
 
 </style>

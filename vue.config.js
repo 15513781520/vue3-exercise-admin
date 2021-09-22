@@ -8,6 +8,7 @@ module.exports = {
                 'views': '@/views',
                 'style': '@/style',
                 'config': '@/config',
+                'assets': '@/assets'
             }
         }
     }
